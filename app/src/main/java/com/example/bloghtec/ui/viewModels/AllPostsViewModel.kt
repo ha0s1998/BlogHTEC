@@ -17,19 +17,21 @@ import retrofit2.Response
 
 public class AllPostsViewModel : ViewModel() {
 
-    var localRepositrory : LocalRepository
-    val data : MutableLiveData<List<PostItem>?> = MutableLiveData(null)
+    var localRepositrory: LocalRepository
+    val data: MutableLiveData<List<PostItem>?> = MutableLiveData(null)
 
     init {
         localRepositrory = LocalRepository.getDatabase()
         getPosts()
     }
 
-    fun getPosts(){
+    fun getPosts() {
         CoroutineScope(IO).launch {
-            while(true){
-                loadData()
-                delay(10*1000)
+            loadData()
+            delay(10 * 1000)
+            while (true) {
+                getPostsFromAPI()
+                delay(10 * 1000)
             }
         }
     }
@@ -59,7 +61,7 @@ public class AllPostsViewModel : ViewModel() {
                 response: Response<List<PostItem>?>
             ) {
                 deleteCachedPosts()
-                val apiList = response.body()?: listOf()
+                val apiList = response.body() ?: listOf()
                 data.postValue(apiList)
                 insertPostsToCache(apiList!!)
             }
@@ -72,7 +74,7 @@ public class AllPostsViewModel : ViewModel() {
         }
     }
 
-    fun deleteCachedPosts() : Job {
+    fun deleteCachedPosts(): Job {
         return CoroutineScope(IO).launch {
             localRepositrory.deleteAllPosts()
         }
