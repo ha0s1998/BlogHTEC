@@ -65,7 +65,7 @@ class PostActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object: Callback{
             override fun onResponse(call: Call, response: Response) {
-                val bod = response?.body()?.string()
+                val bod = response?.body?.string()
                 val gson = GsonBuilder().create()
                 val userDetails = gson.fromJson(bod, UserDetails::class.java)
 
