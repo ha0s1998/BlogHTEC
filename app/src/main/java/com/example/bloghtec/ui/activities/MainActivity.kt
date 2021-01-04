@@ -1,11 +1,12 @@
-package com.example.bloghtec
+package com.example.bloghtec.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.bloghtec.R
 
-class PostPage : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_post_page)
+        setContentView(R.layout.activity_main)
     }
 }
